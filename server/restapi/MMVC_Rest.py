@@ -92,9 +92,10 @@ class MMVC_Rest:
                     name="static",
                 )
             else:
+                # model_dir may not exist yet (e.g. sample download failed offline)
                 app_fastapi.mount(
                     f"/{voiceChangerParams.model_dir}",
-                    StaticFiles(directory=voiceChangerParams.model_dir),
+                    StaticFiles(directory=voiceChangerParams.model_dir, check_dir=False),
                     name="static",
                 )
 

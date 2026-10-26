@@ -62,6 +62,9 @@ def _generateSampleJsons(sampleJsonUrls: list[str]):
 def _generateSampleList(sampleJsons: list[str]):
     samples: list[ModelSamples] = []
     for file in sampleJsons:
+        if not os.path.exists(file):
+            logger.warning(f"[Voice Changer] sample list {file} not found. skip it.")
+            continue
         with open(file, "r", encoding="utf-8") as f:
             jsonDict = json.load(f)
         for vcType in jsonDict:
